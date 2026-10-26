@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Anggota</title>
+</head>
+<body>
+<h1>Daftar Anggota</h1>
+<p><a th:href="@{/buku}">Ke daftar buku</a></p>
+
+<table border="1">
+    <tr><th>ID</th><th>Nama</th><th>Alamat</th><th>Aksi</th></tr>
+    <tr th:each="a : ${daftarAnggota}">
+        <td th:text="${a.idAnggota}">A001</td>
+        <td th:text="${a.namaAnggota}">Nama</td>
+        <td th:text="${a.alamatAnggota}">Alamat</td>
+        <td>
+            <form th:action="@{/anggota/hapus}" method="post">
+                <input type="hidden" name="idAnggota" th:value="${a.idAnggota}">
+                <button type="submit">Hapus</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<h2>Tambah Anggota</h2>
+<form th:action="@{/anggota}" method="post">
+    <input name="idAnggota" placeholder="ID" required>
+    <input name="namaAnggota" placeholder="Nama" required>
+    <input name="alamatAnggota" placeholder="Alamat" required>
+    <button type="submit">Simpan</button>
+</form>
+</body>
+</html>
